@@ -4,6 +4,7 @@ An LLM-powered terminal assistant that can read your **Google Calendar** using n
 
 > *"What are my events today?"*  
 > *"Do I have anything on 2025-05-10?"*
+> *"Create an event on 2025-05-10 with title Flight to xxx City from 7AM to 10AM"
 
 Powered by `pydantic-ai`, Gemini LLMs, and Google Calendar API.
 
@@ -14,7 +15,7 @@ Powered by `pydantic-ai`, Gemini LLMs, and Google Calendar API.
 - ✅ Interact with your Google Calendar via LLM
 - ✅ Use structured tool calls with `pydantic-ai`
 - ✅ Supports natural queries like `today`, `tomorrow`, or `2025-05-10`
-- ✅ Easily extendable (add `create_event`, `delete_event`, etc.)
+- ✅ Easily extendable (add `create_event(done on V1.1)`, `delete_event`, etc.)
 
 ---
 
