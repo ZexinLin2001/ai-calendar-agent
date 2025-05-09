@@ -2,9 +2,9 @@
 
 An LLM-powered terminal assistant that can read your **Google Calendar** using natural language prompts like:
 
-> *"What are my events today?"*  
-> *"Do I have anything on 2025-05-10?"*
-> *"Create an event on 2025-05-10 with title Flight to xxx City from 7AM to 10AM"
+- `"What are my events today?"`
+- `"Do I have anything on 2025-05-10?"`
+- `"Create an event on 2025-05-10 with title Flight to xxx City from 7AM to 10AM"`
 
 Powered by `pydantic-ai`, Gemini LLMs, and Google Calendar API.
 
