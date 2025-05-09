@@ -5,6 +5,7 @@ import pytz
 from app.calendar_api import get_calendar_service
 
 
+# Tool 01: List all events on Google Calendar
 class ListEventsInput(BaseModel):
     day: str  # "today", "tomorrow", or a date like "2025-05-10"
 
@@ -48,3 +49,38 @@ def list_events(input: ListEventsInput) -> str:
 
     except Exception as e:
         return f"Error retrieving events: {e}"
+
+
+# Tool 02: Create new Google Calendar Item
+class CreateEventInput(BaseModel):
+    title: str                     # Title of the calendar event
+    date: str                      # Date in YYYY-MM-DD format
+    start_time: str               # Start time in 24-hour format (e.g., "15:00")
+    end_time: str                 # End time in 24-hour format (e.g., "16:00")
+    description: str = ""         # Optional description
+
+def create_event(input: CreateEventInput) -> str:
+    service = get_calendar_service()
+
+    try:
+        start_datetime = f"{input.date}T{input.start_time}:00"
+        end_datetime = f"{input.date}T{input.end_time}:00"
+
+        event = {
+            'summary': input.title,
+            'description': input.description,
+            'start': {
+                'dateTime': start_datetime,
+                'timeZone': 'America/Chicago'  # ← update if needed
+            },
+            'end': {
+                'dateTime': end_datetime,
+                'timeZone': 'America/Chicago'
+            }
+        }
+
+        created_event = service.events().insert(calendarId='primary', body=event).execute()
+        return f"✅ Event '{input.title}' created for {input.date} from {input.start_time} to {input.end_time}"
+
+    except Exception as e:
+        return f"❌ Failed to create event: {e}"

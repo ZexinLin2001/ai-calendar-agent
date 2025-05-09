@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Scopes define access level; 'readonly' is enough for listing events
-SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
+# Scopes define access level - support read and write
+SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 # Load from environment variables
 CREDENTIALS_PATH = os.getenv("GOOGLE_CREDENTIALS_PATH", "credentials.json")
