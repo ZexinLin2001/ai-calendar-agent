@@ -62,16 +62,30 @@ class CreateEventInput(BaseModel):
 def create_event(input: CreateEventInput) -> str:
     service = get_calendar_service()
 
+    now = datetime.now(pytz.utc)
+    if input.date.lower() == "today":
+        date = now
+    elif input.date.lower() == "tomorrow":
+        date = now + timedelta(days=1)
+    else:
+        try:
+            date = datetime.strptime(input.date, "%Y-%m-%d")
+        except ValueError:
+            return "❌ Unrecognized date format. Use 'today', 'tomorrow', or YYYY-MM-DD."
+
+    # ✅ Format date string correctly
+    resolved_date = date.strftime("%Y-%m-%d")
+
     try:
-        start_datetime = f"{input.date}T{input.start_time}:00"
-        end_datetime = f"{input.date}T{input.end_time}:00"
+        start_datetime = f"{resolved_date}T{input.start_time}:00"
+        end_datetime = f"{resolved_date}T{input.end_time}:00"
 
         event = {
             'summary': input.title,
             'description': input.description,
             'start': {
                 'dateTime': start_datetime,
-                'timeZone': 'America/Chicago'  # ← update if needed
+                'timeZone': 'America/Chicago'
             },
             'end': {
                 'dateTime': end_datetime,
@@ -80,7 +94,7 @@ def create_event(input: CreateEventInput) -> str:
         }
 
         created_event = service.events().insert(calendarId='primary', body=event).execute()
-        return f"✅ Event '{input.title}' created for {input.date} from {input.start_time} to {input.end_time}"
+        return f"✅ Event '{input.title}' created for {resolved_date} from {input.start_time} to {input.end_time}"
 
     except Exception as e:
         return f"❌ Failed to create event: {e}"

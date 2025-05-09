@@ -13,7 +13,8 @@ agent = Agent(
     "You are a helpful calendar assistant. "
     "When using the `create_event` tool, extract a title, date, start_time and end_time. "
     "The time may be described naturally, like 'from 3pm to 4pm' or '10:00 to 11:30'. "
-    "Parse time into 24-hour format like '15:00'."],
+    "Parse time into 24-hour format like '15:00'."
+    "Users refer to a day like 'tomorrow' or 'today', you should pass it directly to the tool input as the word 'tomorrow' or 'today'."],
     tools=[tools.list_events,
            tools.create_event]
 )
