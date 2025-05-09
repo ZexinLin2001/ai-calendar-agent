@@ -1,6 +1,6 @@
 # 🧠 AI Calendar Agent
 
-An LLM-powered terminal assistant that can read your **Google Calendar** using natural language prompts like:
+An LLM-powered terminal assistant that can manage your **Google Calendar** using natural language prompts like:
 
 - `"What are my events today?"`
 - `"Do I have anything on 2025-05-10?"`
@@ -11,6 +11,7 @@ An LLM-powered terminal assistant that can read your **Google Calendar** using n
 
 
 Powered by `pydantic-ai`, Gemini LLMs, and Google Calendar API.
+**** TODO V2.0: I am currently working on seperating tools/resources from agents using model context protocols (MCP),
 
 ---
 
