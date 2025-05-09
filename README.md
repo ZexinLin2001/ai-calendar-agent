@@ -5,6 +5,10 @@ An LLM-powered terminal assistant that can read your **Google Calendar** using n
 - `"What are my events today?"`
 - `"Do I have anything on 2025-05-10?"`
 - `"Create an event on 2025-05-10 with title Flight to xxx City from 7AM to 10AM"`
+- `"Give me my weekly report"`
+- `"Cancel my event xxx for tomorrow"`
+- `"What is my next event"`
+
 
 Powered by `pydantic-ai`, Gemini LLMs, and Google Calendar API.
 
