@@ -251,3 +251,50 @@ def weekly_view(input: WeeklyViewInput) -> str:
     return "\n".join(lines)
 
 
+# TOOL 07: Get detail of an event
+class GetEventDetailInput(BaseModel):
+    title: str
+    date: str  # e.g., "today", "tomorrow", or "2025-05-10"
+
+def get_event_detail(input: GetEventDetailInput) -> str:
+    service = get_calendar_service()
+
+    try:
+        resolved_date = resolve_date(input.date)
+        start_of_day = f"{resolved_date}T00:00:00Z"
+        end_of_day = f"{resolved_date}T23:59:59Z"
+
+        events_result = service.events().list(
+            calendarId='primary',
+            timeMin=start_of_day,
+            timeMax=end_of_day,
+            singleEvents=True,
+            orderBy='startTime'
+        ).execute()
+
+        events = events_result.get('items', [])
+        if not events:
+            return f"📭 No events found on {resolved_date}."
+
+        matched = [e for e in events if e.get('summary', '').lower() == input.title.lower()]
+        if not matched:
+            return f"❌ No event titled '{input.title}' found on {resolved_date}."
+
+        event = matched[0]
+        summary = event.get('summary', '(No title)')
+        start = event['start'].get('dateTime', event['start'].get('date'))
+        end = event['end'].get('dateTime', event['end'].get('date'))
+        description = event.get('description', '(No description)')
+        location = event.get('location', '(No location)')
+
+        return (
+            f"📌 Event: {summary}\n"
+            f"🕒 Time: {start} to {end}\n"
+            f"📍 Location: {location}\n"
+            f"📝 Description: {description}"
+        )
+
+    except Exception as e:
+        return f"❌ Failed to retrieve event details: {e}"
+
+

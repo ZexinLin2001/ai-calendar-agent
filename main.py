@@ -15,13 +15,15 @@ agent = Agent(
     "The time may be described naturally, like 'from 3pm to 4pm' or '10:00 to 11:30'. "
     "Parse time into 24-hour format like '15:00'."
     "Users refer to a day like 'tomorrow' or 'today', you should pass it directly to the tool input as the word 'tomorrow' or 'today'."],
+    
     # Register all tools for calendar agent
     tools=[tools.list_events,
            tools.create_event,
            tools.delete_event,
            tools.update_event,
            tools.weekly_view,
-           tools.view_next_event]
+           tools.view_next_event,
+           tools.get_event_detail]
 )
 
 def main():
