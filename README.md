@@ -19,14 +19,16 @@ Powered by `pydantic-ai`, Gemini LLMs, and Google Calendar API.
 ---
 
 ## 📁 Project Structure
+```text
 AI_Agent_Calendar/
-├── main.py # Terminal-based interaction loop
+├── main.py              # Terminal-based interaction loop
 ├── app/
-│ ├── tools.py # Tool functions
-│ └── calendar_api.py # Auth + calendar service logic for google calendar
-├── .env # Environment variables (not committed - you should set up your own env)
-├── requirements.txt
-├── .gitignore
+│   ├── tools.py         # Tool functions (e.g., list_events)
+│   └── calendar_api.py  # Auth + calendar service logic for Google Calendar
+├── .env                 # Environment variables (not committed – set your own)
+├── requirements.txt     # Python dependencies
+├── .gitignore           # Files to exclude from version control
+```
 
 ## 🛠️ Requirements
 
